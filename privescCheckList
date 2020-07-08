@@ -1,0 +1,65 @@
+@elbee_ez on twitter
+
+|-|-|-|-|-|-|-|-|-|-|-|-|-|
+-|-|-|-|-|-|-|-|-|-|-|-|-|-
+***PRIVILEGE ESCALATION***
+|-|-|-|-|-|-|-|-|-|-|-|-|-|
+-|-|-|-|-|-|-|-|-|-|-|-|-|-
+
+!!!!!!RUN LinEnum!!!!!!!
+
+CHECK KERNEL VERSION: uname -a then searchsploit x | sort -n
+
+[][][][][][][][][][][]
+
+Note: Who is part of the root group? GID:0: 
+Is anyone?
+
+
+#!~~ENUM CHECKLIST~~!#
+
++=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=
+CHECK FOR SUID/GUID FILES
+
+find / -perm -u=s -type f 2>/dev/null
+
+TO CREATE CUSTOM PATH VARIABLE
+
+export PATH=/tmp:$PATH
+cd /tmp/
+echo '/bin/sh' > cat
+chmod +x cat
+
+ANY FILES WITH SUID OR GUID PERMISSIONS? 
+---------------------------------------
+	--Is the executable custom? If so, create fake
+bash script and export $PATH environment variable.
+	--If the executable is not custom, but displays
+a text editor, execute and !sh to pop a shell
+	--If the executable is not custom, go to 
+https://gtfobins.github.io/
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+DOES THE /etc/passwd DIRECTORY GIVE WRITING PERMISSIONS TO ANYONE BESIDES ROOT?
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+DOES ANY ACCOUNT HAVE ROOT PRIVILEGE ON AN APPLICATION?
+Go to user account and run sudo -l to check.
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+ANY ROOT CRONJOBS? /etc/crontab | If so, replace cronjob code script with reverse payload.
+
+Is /etc/crontab writable?
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+LINENUM RAW: https://raw.githubusercontent.com/rebootuser/LinEnum/master/LinEnum.sh
+
+===================================================================================================
+If ABUSING custom SUID or GUID remember to make imitation executable and export PATH=/tmp:$PATH
+
+!sh to pop a shell
